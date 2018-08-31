@@ -8,18 +8,18 @@ class DataLog {
 
 public:
 
-	DataLog() {
+    DataLog() {
 
-	}
+    }
 
 private:
-	/* CLASS VARIABLES */
-	const int chipSelect = 10;
-	const char* fileName = "data.txt";
+    /* CLASS VARIABLES */
+    const int chipSelect = 10;
+    const char* fileName = "data.txt";
 
 
-	// Set up text file with headers and what not.
-	void initialize_file();
+    // Set up text file with headers and what not.
+    void initialize_file();
 };
 
 #endif

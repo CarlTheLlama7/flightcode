@@ -31,8 +31,10 @@ Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_DCMotor *motor = AFMS.getMotor(4);
 
 /* Assign a unique ID to this sensor at the same time */
+// Acceleration Sensor
 Adafruit_MMA8451 mma = Adafruit_MMA8451();
 
+// Pressure Sensor
 Adafruit_BME280 bme;
 
 // Runmode enum allows the arduino to shift between operation states in flight
@@ -45,7 +47,6 @@ enum Runmode : unsigned char {
 
 // We want to start off with idle on the launchpad.
 Runmode MODE = idle;
-
 
 // the setup function runs once when you press reset or power the board
 void setup() {
