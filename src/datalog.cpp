@@ -23,9 +23,9 @@ void DataLog::initialize_file() {
     } else {
         File dataFile = SD.open(fileName, FILE_WRITE);
         if (dataFile) {
-            // If datafile opened fine print a header, something like:
+            // If datafile opened fine print a header
 
-            dataFile.close();
+//             dataFile.close();
         }
     }
 }
