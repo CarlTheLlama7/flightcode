@@ -7,6 +7,20 @@
 #include <Adafruit_MMA8451.h>
 
 
+namespace pid {
+    double projectedAltitude;
+    double altitude;			// Current altitude.
+    double lastAltitude;		// Altitude reading on last loop.
+    double P;
+    double I;
+    double D;
+    double P_0;			        // Proportional term.
+    double I_0;			        // Integral term.
+    double timeDiff;			// Difference between loops, needed for proportional term.
+    double timerOne;
+    double timerTwo;
+}
+
 /* ALL THE CONSTANTS THE CONTROLLER NEEDS TO FUNCTION */
 
 const double KP = 0.0075;			// Proportional gain.
@@ -25,7 +39,7 @@ const double SEALEVELPRESSURE_HPA = 1013.25; // Pressure sensor needs this
 
 /* FUNCTION DECLARATIONS */
 
-double calculate_altitude(Adafruit_BME280 &sensor);
+double calculate_altitude(Adafruit_BME280 & sensor);
 
 // Calculate the projected altitude, which the controller needs to know in order to function properly.
 double projected_altitude(double veloc, double accel, double currentAlt);
@@ -33,7 +47,7 @@ double projected_altitude(double veloc, double accel, double currentAlt);
 // Pretty self-explanatory
 double calculate_velocity();
 
-double get_accel(Adafruit_MMA8451 &sensor);
+double get_accel(Adafruit_MMA8451 & sensor);
 
 
 // The bread and butter of the whole thing, returns the position the motor should be set to.

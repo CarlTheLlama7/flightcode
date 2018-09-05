@@ -9,7 +9,7 @@
 
 #include <Wire.h>
 #include <SD.h>
-#include <Adafruit_MotorShield.h>
+// #include <Adafruit_MotorShield.h>
 #include <Adafruit_BMP085_U.h>
 #include <Adafruit_BME280.h>
 #include <Adafruit_Sensor.h>
@@ -17,7 +17,7 @@
 #include <Adafruit_MMA8451.h>
 #include "pid.h"
 #include "kalman.h"
-#include "datalog.h"
+#include "datalogger.h"
 
 
 // Creating some kalman filter objects. 
@@ -25,10 +25,10 @@ Kalman altitudeFilter = Kalman(0.01);  // Or something, I don't know what the ac
 Kalman accelFilter = Kalman(0.05);     // Again, no idea what this is actually supposed to be.
 
 // motor shield object
-Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+// Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 
-// pointer to motor at port 1
-Adafruit_DCMotor *motor = AFMS.getMotor(4);
+// // pointer to motor at port 1
+// Adafruit_DCMotor *motor = AFMS.getMotor(4);
 
 /* Assign a unique ID to this sensor at the same time */
 // Acceleration Sensor
@@ -54,7 +54,7 @@ void setup() {
     // VARS
     const int channelA = 3;
     const int channelB = 4;
-    int encoderTicks = 0;                // ticks for encoder
+    // int encoderTicks = 0;                // ticks for encoder
 
 
     // Initialize the sensor 
@@ -64,7 +64,7 @@ void setup() {
     pinMode(channelB, INPUT);
 
     // create with the default frequency 1.6KHz
-    AFMS.begin();
+    // AFMS.begin();
 
     // attach interrupt to pin 3 for encoder output
     //	attachInterrupt(digitalPinToInterrupt(3), channelAEvent, CHANGE);

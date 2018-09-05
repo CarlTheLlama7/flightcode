@@ -1,31 +1,6 @@
 #include "pid.h"
 #include "math.h"
 
-/*
-So since I'm both lazy and I don't like passing a bunch of things to functions,
-I put a lot of the variables in this namespace. That way, we can use them like 
-global variables but they're enclosed within this namespace called pid. If you
-don't know what namespaces are, they are kind of like adding subscripts to variables
-in math, so you can tell variables apart from one another. Global variables aren't 
-necessarily bad, but when you include a bunch of files into one another you might
-accidently name two different variables the same thing and that leads to all sorts 
-of problems. Putting these variables in a namespace prevents that, so there's no 
-naming conflicts.
-*/
-
-namespace pid {
-    double projectedAltitude;
-    double altitude;			// Current altitude.
-    double lastAltitude;		// Altitude reading on last loop.
-    double P;
-    double I;
-    double D;
-    double P_0;			        // Proportional term.
-    double I_0;			        // Integral term.
-    double timeDiff;			// Difference between loops, needed for proportional term.
-    double timerOne;
-    double timerTwo;
-}
 
 
 // Calculates the time between each loop, so we can use it to find velocity.
