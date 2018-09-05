@@ -1,7 +1,19 @@
 #include "pid.h"
 #include "math.h"
 
-
+namespace pid {
+   double projectedAltitude;
+   double altitude;			// Current altitude.
+   double lastAltitude;		// Altitude reading on last loop.
+   double P;
+   double I;
+   double D;
+   double P_0;			    // Proportional term.
+   double I_0;			    // Integral term.
+   double timeDiff;			// Difference between loops, needed for proportional term.
+   double timerOne;
+   double timerTwo;
+}
 
 // Calculates the time between each loop, so we can use it to find velocity.
 void setTimeDiff() {

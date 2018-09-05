@@ -8,19 +8,18 @@
 
 
 namespace pid {
-    double projectedAltitude;
-    double altitude;			// Current altitude.
-    double lastAltitude;		// Altitude reading on last loop.
-    double P;
-    double I;
-    double D;
-    double P_0;			        // Proportional term.
-    double I_0;			        // Integral term.
-    double timeDiff;			// Difference between loops, needed for proportional term.
-    double timerOne;
-    double timerTwo;
+  extern double projectedAltitude;
+  extern double altitude;			// Current altitude.
+  extern double lastAltitude;		// Altitude reading on last loop.
+  extern double P;
+  extern double I;
+  extern double D;
+  extern double P_0;			        // Proportional term.
+  extern double I_0;			        // Integral term.
+  extern double timeDiff;			// Difference between loops, needed for proportional term.
+  extern double timerOne;
+  extern double timerTwo;
 }
-
 /* ALL THE CONSTANTS THE CONTROLLER NEEDS TO FUNCTION */
 
 const double KP = 0.0075;			// Proportional gain.

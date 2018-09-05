@@ -1,3 +1,5 @@
+#include <Adafruit_MotorShield.h>
+
 /*
  Name:		flightcode.ino
  Created:	7/3/2018 6:47:02 PM
@@ -9,7 +11,7 @@
 
 #include <Wire.h>
 #include <SD.h>
-// #include <Adafruit_MotorShield.h>
+#include <Adafruit_MotorShield.h>
 #include <Adafruit_BMP085_U.h>
 #include <Adafruit_BME280.h>
 #include <Adafruit_Sensor.h>
@@ -25,10 +27,10 @@ Kalman altitudeFilter = Kalman(0.01);  // Or something, I don't know what the ac
 Kalman accelFilter = Kalman(0.05);     // Again, no idea what this is actually supposed to be.
 
 // motor shield object
-// Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 
 // // pointer to motor at port 1
-// Adafruit_DCMotor *motor = AFMS.getMotor(4);
+Adafruit_DCMotor *motor = AFMS.getMotor(4);
 
 /* Assign a unique ID to this sensor at the same time */
 // Acceleration Sensor
@@ -64,7 +66,7 @@ void setup() {
     pinMode(channelB, INPUT);
 
     // create with the default frequency 1.6KHz
-    // AFMS.begin();
+    AFMS.begin();
 
     // attach interrupt to pin 3 for encoder output
     //	attachInterrupt(digitalPinToInterrupt(3), channelAEvent, CHANGE);
@@ -81,6 +83,7 @@ void setup() {
         Serial.println("Acceleration sensor was not found. Check the wiring.");
         while (1);
     }
+    
     mma.setRange(MMA8451_RANGE_2_G);
 
 }

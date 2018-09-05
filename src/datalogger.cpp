@@ -17,10 +17,6 @@
 
 */
 
-// 99% sure this is guaranteed to not compile but I think y'all will see what I'm going for
-// I went ahead and pushed it to the repo so we can all take a look. I forgot fprintf doesn't work 
-// with SD library I think
-
 File dataFile;
 
 // Return the number of characters in each header name
@@ -54,16 +50,17 @@ void print_data() {
     if (dataFile) {
         // Length of data array
         int arrLength = sizeof(data_array) / sizeof(data_array[0]);
+        char data_buffer[256]; // load each formatted data point into this buffer, then write to the file
 
         for (int i = 0; i < arrLength; i++) {
             // The amount of indenting per column so data is indented correctly
-            // Subtracting 2 here because we're printing the data to two decimal places.
-            int indent = header_len(headers[i]) - data_len(data_array[i]) - 2;
-
+            // Subtracting 3 here because we're printing the data to two decimal places
+            // so we need space for the two decimal places and the period
+            int indent = header_len(headers[i]) - data_len(data_array[i]) - 3;
             // Print data tab delimited, unless it's the last data point, then print a new line
-            if (i == num_data - 1) fprintf(dataFile, "%*s%.2f\n", indent, "", data_array[i]);
-            else fprintf(dataFile, "%*s%.2f\t", indent, "", data_array[i]);
+            sprintf(data_buffer + strlen(data_buffer), "%*s%.2f\t", indent, "", data_array[i]);
         }
+        dataFile.println(data_buffer);
     }
 }
 
@@ -75,10 +72,11 @@ void initialize_file() {
         File dataFile = SD.open(fileName, FILE_WRITE);
         // printing the data file
         if (dataFile) {
+            char header_buffer[164];
             for (int i = 0; i < num_data; i++) {
-                if (i == 6) fprintf(dataFile, "%s\n", headers[i]); // print new line if at end of array
-                else fprintf(dataFile, "%s\t", headers[i]); // else print tabs
+                sprintf(header_buffer, "%s\t", headers[i]);
             }
+            dataFile.println(header_buffer);
         }
     }
 }
