@@ -7,14 +7,11 @@
 // looking for a text file formatted similar to this:
 
 /*
-
-    Time    Acceleration    Velocity    Altitude    Proj. Altitude    Raw Altitude    Raw Acceleration
-    2.20          -90.94      574.47     3231.78           5280.00         3191.74              -93.21
-    2.25          -89.25      565.39     3272.41           5279.00         3292.42              -87.84
-    2.30          -87.94      560.42     3303.61           5281.00         3330.05              -89.12
-
+    Time(sec)    Acceleration(ft/sec^2)    Velocity(ft/sec)    Altitude(ft)    Proj. Altitude(ft)    Raw Altitude(ft)    Raw Acceleration(ft/sec^2)
+         2.20                    -90.94              574.47         3231.78               5280.00             3191.74                        -93.21
+         2.25                    -89.25              565.39         3272.41               5279.00             3292.42                        -87.84
+         2.30                    -87.94              560.42         3303.61               5281.00             3330.05                        -89.12
     ... and so on
-
 */
 
 File dataFile;
@@ -29,16 +26,13 @@ int header_len(const char * header) {
 int data_len(double data) {
     int n = (int) data;
     if (n == 0) return 1;
-    return floor(log10(abs(n))) + 1;
+    else if (n < 0) return floor(log10(abs(n))) + 2;
+    else return floor(log10(abs(n))) + 1;
 }
 
 // Load the data from the current loop in the main script
 // into the array that holds the data. I guess we can just 
 // do this directly without having two arrays
-
-// void push_data(double dataArray[num_data]) {
-//     memcpy(data, dataArray, sizeof(data));
-// }
 
 // Clear the data array so we can load the data for the next iteration
 void pop_data() {
@@ -74,7 +68,7 @@ void initialize_file() {
         if (dataFile) {
             char header_buffer[164];
             for (int i = 0; i < num_data; i++) {
-                sprintf(header_buffer, "%s\t", headers[i]);
+                sprintf(header_buffer + strlen(header_buffer), "%s\t", headers[i]);
             }
             dataFile.println(header_buffer);
         }
